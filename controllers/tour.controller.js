@@ -119,7 +119,7 @@ module.exports.detailsTour = async (req, res, next) => {
 
 module.exports.trendingTour = async (req, res, next) =>{
     try {
-        const result = await Tour.find({}).sort({tourCount: -1}).limit({limit: 3})
+        const result = await Tour.find({}).sort({tourCount: -1}).limit(3)
 
         return res.status(200).json({
             success: true,
@@ -137,7 +137,7 @@ module.exports.trendingTour = async (req, res, next) =>{
 
 module.exports.cheapestTour = async (req, res, next) =>{
     try {
-        const result = await Tour.find({}).sort({price: 1}).limit({limit: 3})
+        const result = await Tour.find({}).sort({price: 1}).limit(3)
 
         return res.status(200).json({
             success: true,
