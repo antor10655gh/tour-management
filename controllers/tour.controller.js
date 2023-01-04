@@ -31,6 +31,18 @@ module.exports.allTour = async (req, res, next) =>{
         return res.send({status: true, data: result})
     }
 
+    // pagination
+    if(req.query.page){
+        const {page=1, limit=10} = req.query;
+        const skip = (page - 1) * parseInt(limit);
+
+        const totalTour = await Tour.countDocuments(filters)
+        const totalPage = Math.ceil(totalTour/limit); 
+
+        const result = await Tour.find({}).skip(skip).limit(limit)
+        return res.send({status: true, totalTour: totalTour, totalPage: totalPage, data: result})
+    }
+
     return res.status(200).json({
         success: true,
         message: 'Data found successfully',
