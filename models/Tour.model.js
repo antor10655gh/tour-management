@@ -7,6 +7,10 @@ const tourSchema = mongoose.Schema({
         unique: true,
         trim: true
     },
+    description: {
+        type: String,
+        trim: true
+    },
     duration: {
         type: Number,
         required: [true, 'A tour must have a duration']

@@ -11,7 +11,7 @@ app.use(cors());
 
 
 // all route will be here
-app.use('/api/v1/tour', tourRoutes);
+app.use('/api/v1/tours', tourRoutes);
 
 
 // initial api

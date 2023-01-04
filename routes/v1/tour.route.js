@@ -6,6 +6,5 @@ app.get('/', tourControllers.allTour)
 app.post('/', tourControllers.createTour)
 app.patch('/:id', tourControllers.updateTour)
 app.get('/:id', tourControllers.detailsTour)
-app.delete('/:id', tourControllers.deleteTour)
 
 module.exports = app;
