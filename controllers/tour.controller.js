@@ -93,7 +93,15 @@ module.exports.updateTour = async (req, res, next) => {
 module.exports.detailsTour = async (req, res, next) => {
    try {
     const { id } = req.params;
-    const result = await Tour.find({_id: id})
+    const result = await Tour.findById({_id: id})
+    
+    if(!result.tourCount){
+        console.log(result.tourCount)
+        await Tour.updateOne({_id: id}, {tourCount: 1})
+        
+    }else{
+        await Tour.updateOne({_id: id}, {tourCount: result.tourCount + 1})
+    }
 
     return res.status(200).json({
         success: true,

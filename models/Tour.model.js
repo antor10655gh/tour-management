@@ -51,6 +51,9 @@ const tourSchema = mongoose.Schema({
         message: 'Discount price ({VALUE}) should be below regular price'
         }
     },
+    tourCount: {
+        type: Number,
+    },
 },{
     timestamps: true,
 })
