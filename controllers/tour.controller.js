@@ -16,6 +16,14 @@ module.exports.allTour = async (req, res, next) =>{
     if(!result){
         return res.status(400).res.send({status: false, error: "Something went wrong"});
     }
+
+    // sorting
+    if(req.query.sort){
+        const sortBy = req.query.sort.split(',').join(' ');
+        const result = await Tour.find({}).sort(sortBy);
+        return res.send({status: true, data: result})
+    }
+
     return res.status(200).json({
         success: true,
         message: 'Data found successfully',
