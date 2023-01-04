@@ -24,6 +24,13 @@ module.exports.allTour = async (req, res, next) =>{
         return res.send({status: true, data: result})
     }
 
+    // filtering
+    if(req.query.fields){
+        const fieldsBy = req.query.fields.split(',').join(' ');
+        const result = await Tour.find({}).select(fieldsBy);
+        return res.send({status: true, data: result})
+    }
+
     return res.status(200).json({
         success: true,
         message: 'Data found successfully',
