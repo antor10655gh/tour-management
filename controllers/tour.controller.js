@@ -94,7 +94,7 @@ module.exports.detailsTour = async (req, res, next) => {
    try {
     const { id } = req.params;
     const result = await Tour.findById({_id: id})
-    
+
     if(!result.tourCount){
         console.log(result.tourCount)
         await Tour.updateOne({_id: id}, {tourCount: 1})
@@ -110,10 +110,45 @@ module.exports.detailsTour = async (req, res, next) => {
     })
    } catch (error) {
     res.status(400).json({
+        status: 'fail',
+        message: 'Data not found',
+        error: error
+    })
+   }
+}
+
+module.exports.trendingTour = async (req, res, next) =>{
+    try {
+        const result = await Tour.find({}).sort({tourCount: -1}).limit({limit: 3})
+
+        return res.status(200).json({
+            success: true,
+            message: 'Data found successfully',
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
             status: 'fail',
             message: 'Data not found',
             error: error
         })
-   }
+    }
 }
 
+module.exports.cheapestTour = async (req, res, next) =>{
+    try {
+        const result = await Tour.find({}).sort({price: 1}).limit({limit: 3})
+
+        return res.status(200).json({
+            success: true,
+            message: 'Data found successfully',
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: 'fail',
+            message: 'Data not found',
+            error: error
+        })
+    }
+}
